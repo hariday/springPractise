@@ -1,17 +1,29 @@
 package com.app.spring;
 
-import java.util.Arrays;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+
+
 
 @SpringBootApplication
 public class Application {
+	public static Logger log =  LoggerFactory.getLogger(Application.class);
 
 	public static void main(String[] args) {
-	  ApplicationContext ctx = 	SpringApplication.run(Application.class, args);
-	  Arrays.stream(ctx.getBeanDefinitionNames()).forEach(System.out::println);
-	}
+		try {
+			
+			SpringApplication.run(Application.class, args);
 
+		} catch (Throwable e) {
+			if (e.getClass().getName().contains("SilentExitException")) {
+				
+				log.debug("Spring is restarting the main thread - See spring-boot-devtools");
+			} else {
+				log.error("Application crashed!", e);
+			}
+		}
+	}
+	
 }
