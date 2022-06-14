@@ -7,21 +7,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
-@Table(name = "locTab")
+@Table(name = "loc_Tab")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Location {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Id")
-	Long locId;
+	private Long locId;
 	
 	@Column(name = "code")
-	Long locCode;
+	private Long locCode;
 	
 	@Column(name = "name")
-	String locName;
+	private String locName;
 	
 	@Column(name="type")
-	String locType;
+	private	String locType;
 }

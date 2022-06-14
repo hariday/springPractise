@@ -6,11 +6,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Display Location</title>
 </head>
 <body>
-<c:if test="${locationDisplay == null }">
+<!--<c:if test="${locationDisplay == null }">
 	<h1>No Data</h1>>
-</c:if>
+</c:if> -->
+<h1>No Data</h1>
 </body>
 </html>
