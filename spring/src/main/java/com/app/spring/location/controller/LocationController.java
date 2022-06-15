@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.app.spring.location.entities.Location;
@@ -23,5 +24,12 @@ public class LocationController {
 		List<Location> locList= locationService.displayLocatiion();
 		map.addAttribute("locationDisplay", locList);
 		return "displayLocation";
+	}
+	
+	
+	@PostMapping("/save")
+	public String saveLocatiion(ModelMap map) {
+		return null;
+		
 	}
 }

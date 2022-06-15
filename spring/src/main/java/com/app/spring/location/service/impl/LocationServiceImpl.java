@@ -17,7 +17,6 @@ public class LocationServiceImpl implements LocationService{
 
 	@Override
 	public List<Location> displayLocatiion() {
-		// TODO Auto-generated method stub
 		return locationDao.displayLocatiion();
 	}
 
