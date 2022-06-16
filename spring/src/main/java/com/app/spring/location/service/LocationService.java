@@ -8,4 +8,6 @@ public interface LocationService {
 
 	List<Location> displayLocatiion();
 
+	void save(Location loc);
+
 }

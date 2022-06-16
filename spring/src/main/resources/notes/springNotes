@@ -1,0 +1,90 @@
+@ModelAttribute:
+-----------------------
+
+<form:form method="POST" 
+  action="/SpringMVCFormExample/addEmployee" modelAttribute="employee">
+  
+  modelAttribute attribute is the key which specifies a name of the model object that backs above form.
+  This will correspond to the @ModelAttribute later on in the controller.
+  
+  Ex:
+  
+   <form:form method="POST" 
+          action="/spring-mvc-xml/addEmployee" modelAttribute="employee">
+             <table>
+                <tr>
+                    <td><form:label path="name">Name</form:label></td>
+                    <td><form:input path="name"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="id">Id</form:label></td>
+                    <td><form:input path="id"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="contactNumber">
+                      Contact Number</form:label></td>
+                    <td><form:input path="contactNumber"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit"/></td>
+                </tr>
+            </table>
+        </form:form>
+        
+        
+each input fields is using yet another useful tag from the Spring Form taglib – form: prefix. Each of these fields specifies a path attribute – this must correspond to a getter/setter of the model attribute (in this case, the Employee class). When the page is loaded, the input fields are populated by Spring, which calls the getter of each field bound to an input field. When the form is submitted, the setters are called to save the values of the form to the object.
+
+Finally – when the form is submitted, the POST handler in the controller is invoked and the form is automatically bound to the employee argument that we passed in.
+
+
+Errors Handling :
+By default, Spring MVC throws an exception when errors occur during request binding. This usually not what we want, instead, we should be presenting these errors to the user. We're going to use a BindingResult by adding one as an argument to our controller method:
+
+public String submit(
+  @Valid @ModelAttribute("employee") Employee employee,
+  BindingResult result,
+  ModelMap model)
+  
+  
+ Note:
+ 
+ The BindingResult argument needs to be positioned right after our form backing object – it's one of the rare cases where the order of the method arguments matters. Otherwise, we'll run into the following exception:
+
+java.lang.IllegalStateException: 
+  Errors/BindingResult argument declared without preceding model attribute. 
+    Check your handler method signature!
+
+Now – an exception is no longer thrown; instead, errors will be registered on the BindingResult that is passed to the submit method. At this point, we can handle these errors in a variety of ways – for example, the operation can be canceled:
+
+Ex.
+@RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
+public String submit(@Valid @ModelAttribute("employee")Employee employee, 
+  BindingResult result,  ModelMap model) {
+    if (result.hasErrors()) {
+        return "error";
+    }
+    
+    //Do Something
+    return "employeeView";
+} 
+  
+Note:
+
+Notice how, in case the result contains errors, we're returning another view to the user in order to display these errors correctly. Let's take a look at that view – error.jsp:
+
+<html>
+    <head>
+    </head>
+
+    <body>
+        <h3>Please enter the correct details</h3>
+        <table>
+            <tr>
+                <td><a href="employee">Retry</a></td>
+            </tr>
+        </table>
+    </body>
+
+</html>
+
+

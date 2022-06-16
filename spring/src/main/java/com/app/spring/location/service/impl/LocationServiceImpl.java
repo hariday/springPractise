@@ -2,6 +2,8 @@ package com.app.spring.location.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,13 @@ public class LocationServiceImpl implements LocationService{
 
 	@Override
 	public List<Location> displayLocatiion() {
-		// TODO Auto-generated method stub
 		return locationDao.displayLocatiion();
+	}
+
+	@Transactional
+	@Override
+	public void save(Location loc) {
+		locationDao.save(loc);
 	}
 
 }
