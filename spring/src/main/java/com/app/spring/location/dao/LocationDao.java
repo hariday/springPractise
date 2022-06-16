@@ -6,4 +6,6 @@ import com.app.spring.location.entities.Location;
 
 public interface LocationDao {
 	List<Location> displayLocatiion();
+
+	void save(Location loc);
 }
