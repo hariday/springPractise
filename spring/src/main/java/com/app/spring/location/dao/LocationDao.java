@@ -7,5 +7,11 @@ import com.app.spring.location.entities.Location;
 public interface LocationDao {
 	List<Location> displayLocatiion();
 
-	void save(Location loc);
+	Location save(Location loc);
+
+	void deleteLocation(Long locId);
+
+	Location findById(Long locId);
+
+	Location editLocation(Location loc);
 }

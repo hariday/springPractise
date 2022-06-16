@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.spring.location.entities.Location;
 import com.app.spring.location.service.LocationService;
@@ -38,8 +39,8 @@ public class LocationController {
 			//error.jsp need to add 
 			return "error";
 		}
-		locationService.save(loc);
-		
+		Location location  = locationService.save(loc);
+		map.addAttribute("savemsg", "Location Saved with location Id :"+location.getLocId());
 		return "redirect:/locations/display";
 		
 	}
@@ -47,5 +48,32 @@ public class LocationController {
 	@GetMapping("/createLoc")
 	public String createLocatiion(Model model) {
 		model.addAttribute("loc", new Location());
-		return "createLoction";}
+		return "createLoction";
+		}
+	
+	@GetMapping("/deleteById")
+	public String deleteLocatiion(@RequestParam("locId")Long locId , ModelMap model) {
+		 locationService.deleteLocation(locId);
+		return "redirect:/locations/display";
+		
+	}
+	
+	@GetMapping("/updateById")
+	public String showEditLocatiion(@RequestParam("locId")Long locId , ModelMap model) {
+		Location loc =  locationService.findById(locId);
+		model.addAttribute("showLocation", loc);
+		return "editLocation";
+		
+	}
+	@GetMapping("/edit")
+	public String editLocation(@ModelAttribute("loc") Location loc , BindingResult result ,  ModelMap map) {
+		if(result.hasErrors()) { 
+			
+			//error.jsp need to add 
+			return "error";
+		}
+		Location location  = locationService.editLocation(loc);
+		map.addAttribute("savemsg", "Location Saved with location Id :"+location.getLocId());
+		return "redirect:/locations/display";
+	}
 }

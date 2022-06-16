@@ -8,6 +8,12 @@ public interface LocationService {
 
 	List<Location> displayLocatiion();
 
-	void save(Location loc);
+	Location save(Location loc);
+
+	void deleteLocation(Long locId);
+
+	Location findById(Long locId);
+
+	Location editLocation(Location loc);
 
 }

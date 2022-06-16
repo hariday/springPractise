@@ -24,8 +24,23 @@ public class LocationServiceImpl implements LocationService{
 
 	@Transactional
 	@Override
-	public void save(Location loc) {
-		locationDao.save(loc);
+	public Location save(Location loc) {
+		return locationDao.save(loc);
+	}
+
+	@Override
+	public void deleteLocation(Long locId) {
+		locationDao.deleteLocation(locId);		
+	}
+
+	@Override
+	public Location findById(Long locId) {
+		return locationDao.findById(locId);
+	}
+
+	@Override
+	public Location editLocation(Location loc) {
+		return locationDao.editLocation(loc);
 	}
 
 }

@@ -25,8 +25,25 @@ public class LocationDaoImpl implements LocationDao {
 		return locRepo.findAll();
 	}
 	@Override
-	public void save(Location loc) {
-		 locRepo.save(loc);
+	public Location save(Location loc) {
+		 
 		 log.info("Location saved  : {}",loc);
+		 return locRepo.save(loc);
+	}
+	@Override
+	public void deleteLocation(Long locId) {
+		locRepo.delete(Location.builder().locId(locId).build());		
+	}
+	@Override
+	public Location findById(Long locId) {
+		return locRepo.findById(locId).get();
+	}
+	@Override
+	public Location editLocation(Location loc) {
+		/*
+		 * Location proxyLoc = Location.builder().locId(loc.getLocId()).build();
+		 * locRepo.sa
+		 */
+		return locRepo.save(loc);
 	}
 }

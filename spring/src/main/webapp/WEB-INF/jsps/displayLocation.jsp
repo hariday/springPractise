@@ -17,6 +17,11 @@
 position: relative;
     top: 65px;
 }
+
+#d1 , #e1{
+height: 30px;
+
+}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
 rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -36,6 +41,7 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
 						<td>Code</td>
 						<td>Name</td>
 						<td>Type</td>
+						<td colspan="2" >Action</td>
 					</tr>
 				</thead>
 				
@@ -46,6 +52,8 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
 							<td>${loc.locCode }</td>
 							<td>${loc.locName }</td>
 							<td>${loc.locType }</td>
+							<td><a href="/locations/deleteById?locId=${loc.locId}"><img  id = "d1" alt="" src="/locDelete.png"></a></td>
+							<td><a href="/locations/updateById?locId=${loc.locId}"><img id ="e1" alt="" src="/locEdit.png"></a></td>
 						</tr>
 						<br>
 					</c:forEach>
