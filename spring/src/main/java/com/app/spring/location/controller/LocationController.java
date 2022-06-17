@@ -61,11 +61,12 @@ public class LocationController {
 	@GetMapping("/updateById")
 	public String showEditLocatiion(@RequestParam("locId")Long locId , ModelMap model) {
 		Location loc =  locationService.findById(locId);
-		model.addAttribute("showLocation", loc);
+		//model.addAttribute("loc",loc );
+		model.addAttribute("loc", loc);
 		return "editLocation";
 		
 	}
-	@GetMapping("/edit")
+	@PostMapping("/edit")
 	public String editLocation(@ModelAttribute("loc") Location loc , BindingResult result ,  ModelMap map) {
 		if(result.hasErrors()) { 
 			
